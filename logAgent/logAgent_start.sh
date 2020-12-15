@@ -20,8 +20,11 @@ if [ ! -d "filebeat-7.7.0-linux-x86_64" ]; then
 		 
 		echo "拷贝初始化配置filebeat.yml......"
 		cp filebeat.yml filebeat-7.7.0-linux-x86_64
+		
 		echo "创建动态配置目录"
 		mkdir filebeat-7.7.0-linux-x86_64/inputs.d
+		cp filebeat-demo.yml filebeat-7.7.0-linux-x86_64/inputs.d
+		inputs.d
 	fi
 fi
 wait
