@@ -89,6 +89,7 @@ sudo passwd es
 sudo chown -R es:es $basedir/elasticsearch-7.10.0
 
 echo "=======================================启动zookeeper..."
+cp server.properties $basedir/kafka_2.12-2.4.0/config/ 
 $basedir/kafka_2.12-2.4.0/bin/zookeeper-server-start.sh kafka_2.12-2.4.0/config/zookeeper.properties & 
 
 sleep 5
@@ -97,7 +98,7 @@ $basedir/kafka_2.12-2.4.0/bin/kafka-server-start.sh kafka_2.12-2.4.0/config/serv
 
 sleep 10
 echo "=======================================创建kafka topic..."
-$basedir/kafka_2.12-2.4.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic logcentre &
+$basedir/kafka_2.12-2.4.0/bin/kafka-topics.sh --create --zookeeper kafka:2181 --replication-factor 1 --partitions 1 --topic logcentre &
 
 sleep 5
 echo "=======================================启动logstash..."
@@ -106,7 +107,7 @@ $basedir/logstash-7.10.0/bin/logstash -f ./logstash-7.10.0/config/logstash-sampl
 
 sleep 3
 echo "=======================================启动elasticsearch..."
-
+sysctl -w vm.max_map_count=262144
 cp elasticsearch.yml $basedir/elasticsearch-7.10.0/config/ 
 cmd=$basedir"/elasticsearch-7.10.0/bin/elasticsearch &"
 su - es  -c $cmd &
