@@ -89,7 +89,28 @@ sudo passwd es
 sudo chown -R es:es $basedir/elasticsearch-7.10.0
 
 echo "=======================================启动zookeeper..."
+
+read -p "请输入本地IP: " sinstall
+if [ ! $sinstall ]; then
+echo "必须输入IP，启动退出"
+exit
+fi
+
+##增加advertised.listeners=PLAINTEXT://$sinstall:9092
+
+reg_str="$sinstall kafka"
+if grep -q $reg_str /etc/hosts
+then
+echo "is exist!"
+else
+	echo $reg_str >> /etc/hosts
+  
+fi
+
 cp server.properties $basedir/kafka_2.12-2.4.0/config/ 
+insert=advertised.listeners=PLAINTEXT://$sinstall:9092
+echo $insert >> $basedir/kafka_2.12-2.4.0/config/server.properties
+
 $basedir/kafka_2.12-2.4.0/bin/zookeeper-server-start.sh kafka_2.12-2.4.0/config/zookeeper.properties & 
 
 sleep 5
