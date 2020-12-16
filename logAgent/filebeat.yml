@@ -179,7 +179,7 @@ setup.kibana:
 
 #------------------------------kafka-----------------------------------
 output.kafka:
-  hosts: ["localhost:9092"]
+  hosts: ["kafka:9092"]
   topic: logcentre
   keep_alive: 10s
 
