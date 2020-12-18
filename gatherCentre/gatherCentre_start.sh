@@ -6,6 +6,11 @@ precise_waiting()
        continue
     done
 }
+basedir=`cd $(dirname $0); pwd -P`
+
+$basedir/kafka_2.12-2.4.0/bin/kafka-server-stop.sh $basedir/kafka_2.12-2.4.0/config/server.properties &
+
+sleep 5
 PID=`ps -ef |grep logGatherSystem  |grep -v grep | awk '{print $2}'`
 echo $PID
 if [ ! "$PID" ];then  # 这里判断TOMCAT进程是否存在
@@ -81,7 +86,7 @@ else
 echo "kibana套件...OK"
 fi
 
-basedir=`cd $(dirname $0); pwd -P`
+
 
 echo "=======================================请初始化es密码，输入es"
 sudo adduser es  
@@ -111,12 +116,12 @@ cp server.properties $basedir/kafka_2.12-2.4.0/config/
 insert=advertised.listeners=PLAINTEXT://$sinstall:9092
 echo $insert >> $basedir/kafka_2.12-2.4.0/config/server.properties
 
-$basedir/kafka_2.12-2.4.0/bin/zookeeper-server-start.sh kafka_2.12-2.4.0/config/zookeeper.properties & 
+sleep 5
+$basedir/kafka_2.12-2.4.0/bin/zookeeper-server-start.sh $basedir/kafka_2.12-2.4.0/config/zookeeper.properties & 
 
 sleep 5
 echo "=======================================启动kafka..."
-$basedir/kafka_2.12-2.4.0/bin/kafka-server-stop.sh
-$basedir/kafka_2.12-2.4.0/bin/kafka-server-start.sh kafka_2.12-2.4.0/config/server.properties &
+$basedir/kafka_2.12-2.4.0/bin/kafka-server-start.sh $basedir/kafka_2.12-2.4.0/config/server.properties &
 
 sleep 10
 echo "=======================================创建kafka topic..."
@@ -125,7 +130,7 @@ $basedir/kafka_2.12-2.4.0/bin/kafka-configs.sh --zookeeper localhost:2181 --enti
 sleep 10
 echo "=======================================启动logstash..."
 cp logstash-sample.conf $basedir/logstash-7.10.0/config/ 
-$basedir/logstash-7.10.0/bin/logstash -f ./logstash-7.10.0/config/logstash-sample.conf &
+nohup $basedir/logstash-7.10.0/bin/logstash -f $basedir/logstash-7.10.0/config/logstash-sample.conf &
 
 sleep 3
 echo "=======================================启动elasticsearch..."
