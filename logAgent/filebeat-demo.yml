@@ -1,9 +1,10 @@
+
 - type: log
 
   paths:
     - /etc/nginx/logs/error.log
   fields:
-       logtype: nginxerror
+       logtype: nginx-error.log
 #  scan_frequency: 10s
   # 日志多行合并采集
     #multiline.pattern: '^\['
@@ -16,3 +17,23 @@
     - /app/logs/g3_gfm_info.log.2020-12-18.0.log
   fields:
       logtype: g3_gfm_info.log.2020-12-18.0.log
+
+      #java多行日志合并
+  multiline:
+    pattern: '^\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}'
+    negate: true
+    match: after
+
+     # multiline.type: pattern
+     # multiline.pattern: '^[[:space:]]+(at|\.{3})[[:space:]]+\b|^Caused by:'
+     # multiline.negate: false
+     # multiline.match: after
+
+     # multiline.pattern: '^\['
+     # multiline.negate: true
+     # multiline.match: after
+
+
+      #multiline.pattern: '^\[0-9]{4}-[0-9]{2}-[0-9]{2}'
+      #multiline.negate: false
+      #multiline.match: after
