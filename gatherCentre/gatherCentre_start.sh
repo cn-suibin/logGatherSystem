@@ -115,6 +115,7 @@ $basedir/kafka_2.12-2.4.0/bin/zookeeper-server-start.sh kafka_2.12-2.4.0/config/
 
 sleep 5
 echo "=======================================启动kafka..."
+$basedir/kafka_2.12-2.4.0/bin/kafka-server-stop.sh
 $basedir/kafka_2.12-2.4.0/bin/kafka-server-start.sh kafka_2.12-2.4.0/config/server.properties &
 
 sleep 10

@@ -1,12 +1,18 @@
 - type: log
 
   paths:
-    - /app/logs/platform_error.log.2020-10-19.log
     - /etc/nginx/logs/error.log
   fields:
-       logtype: syslog
+       logtype: nginxerror
 #  scan_frequency: 10s
   # 日志多行合并采集
     #multiline.pattern: '^\['
     #multiline.negate: true
 #    multiline.match: after
+
+- type: log
+
+  paths:
+    - /app/logs/g3_gfm_info.log.2020-12-18.0.log
+  fields:
+      logtype: g3_gfm_info.log.2020-12-18.0.log
