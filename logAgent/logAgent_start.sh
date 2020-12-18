@@ -37,10 +37,10 @@ if [ ! -d "filebeat-7.7.0-linux-x86_64" ]; then
 	fi
 fi
 wait
-		echo "拷贝初始化配置filebeat.yml......"
-		cp filebeat.yml filebeat-7.7.0-linux-x86_64
-		sed -i -e "s/mmmmm/$sinstall/g" filebeat-7.7.0-linux-x86_64/filebeat.yml
-		cp filebeat-demo.yml filebeat-7.7.0-linux-x86_64/inputs.d
+#		echo "拷贝初始化配置filebeat.yml......"
+#		cp filebeat.yml filebeat-7.7.0-linux-x86_64
+#		sed -i -e "s/mmmmm/$sinstall/g" filebeat-7.7.0-linux-x86_64/filebeat.yml
+#		cp filebeat-demo.yml filebeat-7.7.0-linux-x86_64/inputs.d
 #cp filebeat-demo.yml filebeat-7.7.0-linux-x86_64/inputs.d
 
 $basedir/filebeat-7.7.0-linux-x86_64/filebeat -c $basedir/filebeat-7.7.0-linux-x86_64/filebeat.yml &
