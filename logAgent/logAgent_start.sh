@@ -25,6 +25,7 @@ if [ ! -d "filebeat-7.7.0-linux-x86_64" ]; then
 	echo "下载和初始化logAgent程序......"
 	curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.7.0-linux-x86_64.tar.gz
 	echo "解压logAgent......"
+	rm -rf filebeat-7.7.0-linux-x86_64
 	if tar xvf filebeat-7.7.0-linux-x86_64.tar.gz; then
 		 
 		echo "拷贝初始化配置filebeat.yml......"
