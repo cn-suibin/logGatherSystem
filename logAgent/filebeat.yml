@@ -182,6 +182,7 @@ output.kafka:
   hosts: ["mmmmm:9092"]
   topic: logcentre
   keep_alive: 10s
+  max_message_bytes: 10000000
 
 #================================ Processors =====================================
 

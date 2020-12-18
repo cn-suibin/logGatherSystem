@@ -120,8 +120,8 @@ $basedir/kafka_2.12-2.4.0/bin/kafka-server-start.sh kafka_2.12-2.4.0/config/serv
 sleep 10
 echo "=======================================创建kafka topic..."
 $basedir/kafka_2.12-2.4.0/bin/kafka-topics.sh --create --zookeeper kafka:2181 --replication-factor 1 --partitions 1 --topic logcentre &
-
-sleep 5
+$basedir/kafka_2.12-2.4.0/bin/kafka-configs.sh --zookeeper localhost:2181 --entity-type topics --entity-name logcentre --alter --add-config max.message.bytes=10485760
+sleep 10
 echo "=======================================启动logstash..."
 cp logstash-sample.conf $basedir/logstash-7.10.0/config/ 
 $basedir/logstash-7.10.0/bin/logstash -f ./logstash-7.10.0/config/logstash-sample.conf &
