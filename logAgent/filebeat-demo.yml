@@ -1,6 +1,8 @@
 
 - type: log
 
+  encoding: utf-8
+  
   paths:
     - /etc/nginx/logs/error.log
   fields:
@@ -13,10 +15,12 @@
 
 - type: log
 
+  encoding: utf-8
+
   paths:
-    - /app/logs/g3_gfm_info.log.2020-12-18.0.log
+    - /app/logs/*.log
   fields:
-      logtype: g3_gfm_info.log.2020-12-18.0.log
+      logtype: test.log
 
       #java多行日志合并
   multiline:
